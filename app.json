@@ -1,0 +1,8 @@
+{
+	"name": "Server for surveys",
+	"description": "This is the server for surveys",
+	"repository": "",
+	"logo": "",
+	"keywords": ["node", "express"],
+	"image": ""
+}
