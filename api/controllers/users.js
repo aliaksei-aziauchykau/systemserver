@@ -174,12 +174,12 @@ exports.user_forgot = (req, res, next) => {
 		let secret = user.password + user.seen;
 		let token = jwt.sign(payload, secret);
 		let email = user.email;
-		let subject = 'Restart hasła';
+		let subject = 'Zrestartuj hasło';
 		let text = 'text';
-		let html = '<p>Aby zrestartować hasło, kliknij <a href="http://localhost:4200/' + user._id + '/' + token + '">here</a></p>';
+		let html = '<p>Kliknij tutaj, aby zrestartować hasło <a href="http://localhost:4200/' + user._id + '/' + token + '">here</a></p>';
 		sendOne(email, subject, text, html).catch(err => console.log('Error', err));
 		return res.status(201).json({
-			message: 'Email z wiadomością potrzebną do restartu hasła, wysłany!'
+			message: 'Email wysłany pomyślnie'
 		});
 	})
 	.catch(err => {
@@ -212,7 +212,7 @@ exports.user_reset = (req, res, next) => {
 			.exec()
 			.then(result => {
 				return res.status(201).json({
-					message: 'Password changed!'
+					message: 'Hasło zmienione'
 				});
 			})
 		});
@@ -230,7 +230,7 @@ exports.user_update_user = (req, res, next) => {
 	.exec()
 	.then(result => {
 		res.status(200).json({
-			message: "User updated"
+			message: "Użytkownik zaktualizowany"
 		});
 	})
 	.catch(err => {
@@ -246,7 +246,7 @@ exports.user_delete_user = (req, res, next) => {
 	.exec()
 	.then(result => {
 		res.status(200).json({
-			message: "User deleted"
+			message: "Użytkownik usunięty"
 		});
 	})
 	.catch(err => {
@@ -265,14 +265,14 @@ async function sendOne(email, subject, text, html) {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.systemekspercki@gmail.com, // generated ethereal user
-      pass: process.env.Czarymary@098 // generated ethereal password
+      user: process.env.PieseEmailAddress, // generated ethereal user
+      pass: process.env.PieseEmailPassword // generated ethereal password
     }
   });
 
   // setup email data with unicode symbols
   let mailOptions = {
-    from: '"Your name " <your email>', // sender address
+    from: '"Nazwa " <your email>', // sender address
     to: email, // list of receivers
     subject: subject, // Subject line
     text: text, // plain text body
