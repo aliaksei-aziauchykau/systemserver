@@ -176,7 +176,7 @@ exports.user_forgot = (req, res, next) => {
 		let email = user.email;
 		let subject = 'Zrestartuj hasło';
 		let text = 'text';
-		let html = '<p>Kliknij tutaj, aby zrestartować hasło <a href="http://localhost:4200/' + user._id + '/' + token + '">here</a></p>';
+		let html = '<p>Kliknij tutaj, aby zrestartować hasło <a href="http://localhost:4200/reset' + user._id + '/' + token + '">here</a></p>';
 		sendOne(email, subject, text, html).catch(err => console.log('Error', err));
 		return res.status(201).json({
 			message: 'Email wysłany pomyślnie'
