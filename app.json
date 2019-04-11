@@ -1,6 +1,6 @@
 {
-	"name": "Server for surveys",
-	"description": "This is the server for surveys",
+	"name": "Baza danych systemu oceny eksperckiej",
+	"description": "Baza danych systemu oceny eksperckiej",
 	"repository": "",
 	"logo": "",
 	"keywords": ["node", "express"],

@@ -25,7 +25,7 @@ exports.user_signup = (req, res, next) => {
 	.then(user => {
 		if(user.length >= 1) {
 			return res.status(409).json({
-				message: 'Email exists'
+				message: 'Email istnieje'
 			});
 		} else {
 			bcrypt.hash(req.body.password, 10, (err, hash) => {
@@ -68,13 +68,13 @@ exports.user_login = (req, res, next) => {
 	.then(user => {
 		if(user.length < 1) {
 			return res.status(401).json({
-				message: 'Auth failed'
+				message: 'Autoryzacja sie nie powiodła!'
 			});
 		}
 		bcrypt.compare(req.body.password, user[0].password, (err, result) => {
 			if(err) {
 				return res.status(401).json({
-					message: 'Auth failed'
+					message: 'Autoryzacja sie nie powiodła!'
 				});
 			}
 			if(result) {
@@ -112,7 +112,7 @@ exports.user_login = (req, res, next) => {
 exports.user_get_user = (req, res, next) => {
 	if (!req.headers.authorization) {
 		res.status(401).json({
-			message: 'User not found'
+			message: 'Użytkonik nie znajduje się w bazie danych'
 		});
 	}
 	try {
@@ -127,7 +127,7 @@ exports.user_get_user = (req, res, next) => {
 	.then(user => {
 		if (!user) {
 			return res.status(401).json({
-				message: 'User not found'
+				message: 'Użytkonik nie znajduje się w bazie danych'
 			});
 		}
 		console.log('User', user);
@@ -157,12 +157,12 @@ exports.user_get_users = (req, res, next) => {
 exports.user_forgot = (req, res, next) => {
 	if (!req.body.email) {
 		res.status(401).json({
-			message: "No email found"
+			message: "Nie znaleziono konta email"
 		});
 	}
 	if (!req.headers.origin) {
 		return res.status(401).json({
-			message: "Not allowed"
+			message: "Nie dozwolone"
 		});
 	}
 	User.findOne({email: req.body.email})
@@ -194,7 +194,7 @@ exports.user_reset = (req, res, next) => {
 	.then(user => {
 		if (!user) {
 			return res.status(401).json({
-				message: 'User not found'
+				message: 'Użytkownik nie znaleziony w bazie danych'
 			});
 		}
 		let secret = user.password + user.seen;

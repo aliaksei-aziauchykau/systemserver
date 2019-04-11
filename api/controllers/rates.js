@@ -22,7 +22,7 @@ exports.rate_add_rate = (req, res, next) => {
 		.exec()
 		.then(result => {
 			res.status(200).json({
-				message: 'Rate added successfuly!'
+				message: 'Formularz oceniony!'
 			})
 		}).catch(err => { 
 			console.log(err);

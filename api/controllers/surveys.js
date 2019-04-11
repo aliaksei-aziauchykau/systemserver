@@ -98,7 +98,7 @@ exports.survey_add_survey = (req, res, next) => {
 	.then(result => {
 		console.log(result);
 		res.status(201).json({
-			message: 'Posted survey succesfully',
+			message: 'Formularz dodany pomyślnie!',
 			postedSurvey: {
 				discipline: result.discipline,
 				title: result.title,
@@ -129,7 +129,7 @@ exports.survey_assign_experts = (req, res, next) => {
 	.exec()
 	.then(result => {
 		res.status(200).json({
-			message: 'Survey assigned'
+			message: 'Formularz przypisany'
 		});
 	})
 	.catch(err => {
@@ -142,11 +142,11 @@ exports.survey_assign_experts = (req, res, next) => {
 
 exports.survey_unassign_experts = (req, res, next) => {
 	let id = req.params.id;
-	Survey.updateOne({ _id: id}, { $unset: { expertOne: '', expertTwo: '' }} 
+	Survey.updateOne({ _id: id}, { $unset: { expertOne: '', expertTwo: '' }})
 	.exec()
 	.then(result => {
 		res.status(200).json({
-			message: 'Survey assigned'
+			message: 'Formularz przypisany'
 		});
 	})
 	.catch(err => {
@@ -163,7 +163,7 @@ exports.survey_update_survey = (req, res, next) => {
 	.then(result => {
 		res.status(200).json({
 			result: result,
-			message: 'Survey updated'
+			message: 'Formularz zaktualizowany'
 		});
 	})
 	.catch(err => {
@@ -179,7 +179,7 @@ exports.survey_delete_survey = (req, res, next) => {
 	.exec()
 	.then(result => {
 		res.status(200).json({
-			message: 'Survey deleted'
+			message: 'Formularz usunięty'
 		});
 	})
 	.catch(err => {
