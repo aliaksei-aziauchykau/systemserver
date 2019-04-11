@@ -142,7 +142,7 @@ exports.survey_assign_experts = (req, res, next) => {
 
 exports.survey_unassign_experts = (req, res, next) => {
 	let id = req.params.id;
-	Survey.updateOne({ _id: id}, { $unset: { discipline: '', expertOne: '', expertTwo: '' }}) 
+	Survey.updateOne({ _id: id}, { $unset: { expertOne: '', expertTwo: '' }} 
 	.exec()
 	.then(result => {
 		res.status(200).json({
