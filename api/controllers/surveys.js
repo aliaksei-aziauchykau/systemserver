@@ -1,5 +1,6 @@
 const Survey = require('../models/survey');
 const Rate = require('../models/rate');
+const User = require('../models/user');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 
@@ -95,8 +96,9 @@ exports.survey_add_survey = (req, res, next) => {
 	});
 	survey
 	.save()
-	.then(result => {
+	.then(async result => {
 		console.log(result);
+		await User.update({_id: req.userData.userId, numberOfForms: { $exists: true }}, {$inc: {numberOfForms: -1}}).exec();
 		res.status(201).json({
 			message: 'Formularz dodany pomyślnie!',
 			postedSurvey: {

@@ -13,7 +13,8 @@ const userSchema = mongoose.Schema({
 	discipline: String,
 	token: String,
 	joined: Date,
-	seen: Date
+	seen: Date,
+	numberOfForms: Number
 });
 
 module.exports = mongoose.model('User', userSchema);

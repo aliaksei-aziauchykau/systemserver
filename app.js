@@ -9,7 +9,7 @@ const surveyRoutes = require('./api/routes/survey');
 const rateRoutes = require('./api/routes/rate');
 
 mongoose.connect(
-	"mongodb+srv://dbUser:"+ process.env.SurveyDBPass +"@cluster0-6fxvn.gcp.mongodb.net/test?retryWrites=true", 
+	"mongodb+srv://dbUser:" + process.env.SurveyDBPass + "@cluster0-6fxvn.gcp.mongodb.net/test?retryWrites=true",
 	//"mongodb://localhost:27017/survey",
 	{ useNewUrlParser: true });
 mongoose.connection.on('connected', ()=> {
