@@ -157,7 +157,7 @@ exports.user_get_users = (req, res, next) => {
 exports.user_get_users_by_discipline = (req, res, next) => {
   User.find({
     discipline: req.params.discipline,
-    roles: { $in: ['EXPERT'] }
+    'roles.0': { $exists: false }
   })
     .select('_id name email roles discipline')
     .exec()
