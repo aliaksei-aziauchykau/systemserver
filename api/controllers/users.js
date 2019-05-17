@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
 exports.user_get_experts = (req, res, next) => {
-  User.find({roles: 'EXPERT', discipline: req.params.discipline})
+  User.find({roles: 'USER', discipline: req.params.discipline})
     .select('_id email name discipline')
     .exec()
     .then(result => {
