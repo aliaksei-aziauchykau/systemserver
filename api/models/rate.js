@@ -9,7 +9,8 @@ const rateSchema = mongoose.Schema({
   question5: String,
   rate: Number,
   survey: { type: mongoose.Schema.Types.ObjectId, ref: 'Survey' },
-  expert: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+  expert: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  draft: Boolean
 });
 
 module.exports = mongoose.model('Rate', rateSchema);
