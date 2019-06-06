@@ -7,6 +7,7 @@ const rateSchema = mongoose.Schema({
   question3: String,
   question4: String,
   question5: String,
+  description: String,
   rate: Number,
   survey: { type: mongoose.Schema.Types.ObjectId, ref: 'Survey' },
   expert: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

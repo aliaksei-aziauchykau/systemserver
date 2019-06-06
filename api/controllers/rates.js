@@ -11,6 +11,7 @@ exports.rate_add_rate = (req, res, next) => {
     question3: req.body.question3,
     question4: req.body.question4,
     question5: req.body.question5,
+    description: req.body.description,
     rate: req.body.rate,
     expert: mongoose.Types.ObjectId(req.body.expert),
     survey: mongoose.Types.ObjectId(req.body.survey),

@@ -10,11 +10,12 @@ const userSchema = mongoose.Schema({
 	password: { type: String, required: true },
 	name: String,
 	roles: [String],
-	discipline: String,
+	disciplines: [String],
 	token: String,
 	joined: Date,
 	seen: Date,
-	numberOfForms: Number
+    numberOfForms: Number,
+    college: String
 });
 
 module.exports = mongoose.model('User', userSchema);
