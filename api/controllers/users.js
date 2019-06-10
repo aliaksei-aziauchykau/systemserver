@@ -20,8 +20,22 @@ const checkAuth = (req, res) => {
     }
 }
 
+const hashPassword = async (password) => {
+
+    const saltRounds = 10;
+
+    const hashedPassword = await new Promise((resolve, reject) => {
+        bcrypt.hash(password, saltRounds, function (err, hash) {
+            if (err) reject(err)
+            resolve(hash)
+        });
+    })
+
+    return hashedPassword
+}
+
 exports.user_get_experts = (req, res, next) => {
-    User.find({ roles: 'EXPERT', discipline: req.params.discipline })
+    User.find({ roles: 'EXPERT', disciplines: req.params.discipline })
         .select('_id email name discipline')
         .exec()
         .then(result => {
@@ -138,9 +152,12 @@ exports.user_put_update_user = (req, res, next) => {
                 });
             }
         });
-        console.log(req.body, userId);
 
-        return await User.updateOne({ _id: userId }, { $set: valueChecker.ClearObject(req.body) }, { upsert: true }).exec();
+        let password = req.body.password; 
+        if(password) {
+            password = await hashPassword(password);
+        }
+        return await User.updateOne({ _id: userId }, { $set: valueChecker.ClearObject({...req.body, password}) }, { upsert: true }).exec();
     }
 
     chain()
@@ -273,7 +290,7 @@ exports.user_get_users_by_discipline = (req, res, next) => {
     console.log(req.params.discipline);
     User.find({
         $and: [
-            {disciplines: req.params.discipline},
+            { disciplines: req.params.discipline },
             { roles: { $ne: "EXPERT" } }
         ]
     })
@@ -427,12 +444,12 @@ async function sendOne(email, subject, text, html) {
 
 exports.user_number_of_assigned_forms = (req, res, next) => {
     User.find({ _id: req.userData.userId })
-        .select('_id discipline numberOfForms')
+        .select('_id assignedDiscipline numberOfForms')
         .exec()
         .then(users => {
             return res.status(201).json({
                 numberOfAssignments: users && users[0] && users[0].numberOfForms ? users[0].numberOfForms : 0,
-                discipline: users && users[0] ? users[0].discipline : ''
+                assignedDiscipline: users && users[0] ? users[0].assignedDiscipline : ''
             });
         })
         .catch(err => {
