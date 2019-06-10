@@ -26,7 +26,7 @@ exports.survey_get_surveys = (req, res, next) => {
 	let filledBy = req.params.id;
 	let expert = req.params.expert;
 	let query = {};
-	let query2 = {};
+	let query2 = null;
 	if (status && filledBy) {
 		query = {filledBy: filledBy, status: status};
 	}
@@ -37,7 +37,7 @@ exports.survey_get_surveys = (req, res, next) => {
 		query = { expertOne: mongoose.Types.ObjectId(expert), status: status };
 		query2 = { expertTwo: mongoose.Types.ObjectId(expert), status: status }
 	}
-	Survey.find({ $or: [query, query2]})
+	Survey.find({ $or: [query, query2].filter(Boolean)})
 	.populate('rates')
 	.populate('expertOne', '_id name discipline')
 	.populate('expertTwo', '_id name discipline')

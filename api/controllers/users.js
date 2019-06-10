@@ -79,7 +79,7 @@ exports.user_signup = (req, res, next) => {
 }
 
 exports.user_post_create_user = (req, res, next) => {
-    checkAuth();
+    checkAuth(req, res);
     User.find({ email: req.body.email })
         .exec()
         .then(user => {
@@ -230,7 +230,7 @@ exports.user_get_user = (req, res, next) => {
 }
 
 exports.user_get_user_by_id = (req, res, next) => {
-    checkAuth();
+    checkAuth(req, res);
     const {
         userId
     } = req.params;
@@ -270,9 +270,12 @@ exports.user_get_users = (req, res, next) => {
 }
 
 exports.user_get_users_by_discipline = (req, res, next) => {
+    console.log(req.params.discipline);
     User.find({
-        discipline: req.params.discipline,
-        'roles.0': { $exists: false }
+        $and: [
+            {disciplines: req.params.discipline},
+            { roles: { $ne: "EXPERT" } }
+        ]
     })
         .select('_id name email roles discipline')
         .exec()

@@ -13,15 +13,8 @@ const storage = multer.diskStorage({
             surveyId
         } = req.params;
         
-        if (!fs.existsSync(`./public/uploads/${id}`)) {
-            fs.mkdirSync(`./public/uploads/${id}`);
-        }
-
-        if (!fs.existsSync(`./public/uploads/${id}/${surveyId}`)) {
-            fs.mkdirSync(`./public/uploads/${id}/${surveyId}`);
-        }
-
         const path = `./public/uploads/${id}/${surveyId}`;
+        pathCreate(path);
         callback(null, path);
     },
     filename: (req, file, callback) => {
@@ -31,6 +24,17 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage }).array('userPdf', 10);
+
+const pathCreate = (path) => {
+    const pathArray = path.split("/");
+    let curruntPath = pathArray[0];
+    for(let i=1; i < pathArray.length; i++) {
+        curruntPath = curruntPath + "/" + pathArray[i];
+        if (!fs.existsSync(curruntPath)) {
+            fs.mkdirSync(curruntPath);
+        }
+    }
+}
 
 const uploadMiddleware = (req, res, next) => {
     upload(req, res, err => {
