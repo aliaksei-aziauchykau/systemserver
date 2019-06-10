@@ -10,7 +10,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "server:run": "SET JWT_KEY=secret && SET SurveyDBPass=haselko991 && node server.js",
+    "server:rerun": "SET JWT_KEY=secret && SET SurveyDBPass=haselko991 && nodemon server.js"
   },
   "private": true,
   "dependencies": {

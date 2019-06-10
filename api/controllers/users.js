@@ -79,7 +79,7 @@ exports.user_signup = (req, res, next) => {
 }
 
 exports.user_post_create_user = (req, res, next) => {
-    // checkAuth();
+    checkAuth();
     User.find({ email: req.body.email })
         .exec()
         .then(user => {
@@ -230,7 +230,7 @@ exports.user_get_user = (req, res, next) => {
 }
 
 exports.user_get_user_by_id = (req, res, next) => {
-    // checkAuth();
+    checkAuth();
     const {
         userId
     } = req.params;
