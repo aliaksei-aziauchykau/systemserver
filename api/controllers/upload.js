@@ -18,7 +18,10 @@ const addUploadItem = (req, res) => {
             name: fileItem.originalname,
             description,
             path: fileItem.path,
-            exactPath: fileItem.path.replace('public\\', '').replace(/\\/g, '/')
+            exactPath: fileItem.path
+                .replace('public/', '')
+                .replace('public\\', '')
+                .replace(/\\/g, '/')
         };
 
         return UploadHandler.addUploadItem(uploadItem);
