@@ -8,7 +8,7 @@ exports.get_rated_surveys = (req, res, next) => {
         .exec()
         .then(rawDocs => {
 
-            const docs =  rawDocs.filter(x => x.rates.filter(rate => rate && rate.draft === false).length === 2);
+            const docs = rawDocs.filter(x => x.rates.filter(rate => rate && rate.draft === false).length === 2);
 
             const response = {
                 count: docs.length,
