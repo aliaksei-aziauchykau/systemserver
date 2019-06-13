@@ -1,12 +1,15 @@
 const Survey = require('../models/survey');
 
 exports.get_rated_surveys = (req, res, next) => {
-    Survey.find({ rates: { $size: 2 } })
+    Survey.find()
         .populate('rates')
         .populate('expertOne', '_id name discipline')
         .populate('expertTwo', '_id name discipline')
         .exec()
-        .then(docs => {
+        .then(rawDocs => {
+
+            const docs =  rawDocs.filter(x => x.rates.filter(rate => !rate.draft).length == 2);
+
             const response = {
                 count: docs.length,
                 surveys: docs.map(doc => {
