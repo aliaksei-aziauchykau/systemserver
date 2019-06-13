@@ -3,16 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod",
-    "heroku-postbuild": "NODE_ENV=production NODE_MODULES_CACHE=true NODE_VERBOSE=false",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
+    "start": "node server.js",
     "server": "nodemon server.js",
-    "server:run": "SET JWT_KEY=secret && SET SurveyDBPass=haselko991 && node server.js",
-    "server:rerun": "SET JWT_KEY=secret && SET SurveyDBPass=haselko991 && nodemon server.js"
+    "server:run": "node server.js"
   },
   "private": true,
   "dependencies": {
