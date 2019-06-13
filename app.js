@@ -9,6 +9,7 @@ const userRoutes = require('./api/routes/user');
 const surveyRoutes = require('./api/routes/survey');
 const rateRoutes = require('./api/routes/rate');
 const uploadRoutes = require('./api/routes/upload');
+const searchRoutes = require('./api/routes/search');
 
 mongoose.connect(
     "mongodb+srv://dbUser:" + process.env.SurveyDBPass.trim() + "@cluster0-6fxvn.gcp.mongodb.net/test?retryWrites=true",
@@ -44,7 +45,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/survey', surveyRoutes);
 app.use('/api/rate', rateRoutes);
 app.use('/api/upload', uploadRoutes);
-
+app.use('/api/search', searchRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
