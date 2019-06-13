@@ -1,0 +1,61 @@
+	<div class="col-sm">
+		<div *ngIf="forgot" class="col-md">
+			<div *ngIf="forgot" class="col-md">
+					<img src="assets/logo1.png" class="mt-3 img-fluid" alt="Responsive image">
+        <h3 class="mt-5">WprowadŸ swój email logowania do systemu:</h3>
+				<form>
+					<div class="form-group">
+						<input [(ngModel)]="forgotEmail" type="email" name="forgotEmail" class="form-control mt-5 mb-2" placeholder="Email">
+						<div class="form-row text-center">
+    					<div class="col-12">
+        				<button type="submit" class="btn btn-primary mb-1" (click)="forgotUser()">Wyœlij email zmiany has³a</button>
+    					</div>
+						</div>
+						<p class="mb-5 text-center btn btn-light mt-1"><a (click)="changeToLogin()">Wróæ do strony logowania</a></p>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div *ngIf="loggedIn" class="col-sm">
+			<button (click)="logout()">Wyloguj</button>
+		</div>
+		<div *ngIf="resetPassw" class="col-sm">
+			<img src="assets/logo1.png" alt="" class="mb-3">
+			<div>
+				<form class="form-group text-center">
+					<input [(ngModel)]="resetPass" (ngModelChange)="validateButton()" class="form-control mb-2" type="password" name="resetPass" placeholder="New Password" required>
+					<input [(ngModel)]="checkPass" (ngModelChange)="validateButton()" class="form-control mb-2" type="password" name="checkPass" placeholder="Confirm Password" required>
+					<button class="btn btn-primary" (click)="resetPassword()"><i [ngBusy]="busy"></i>Resetuj hasło</button>
+				</form>
+			</div>
+
+    </div>
+    <div>
+		<div *ngIf="loggedOut" class="">
+      <mat-card class="col-sm">
+      <img src="assets/logo1.png" class="mt-3 img-fluid mb-3" alt="Responsive image">
+
+          <form class="form-group text-center mb-1">
+          <mat-form-field appearance="outline" class="example-container">
+              <mat-label>Email</mat-label>
+              <input [(ngModel)]="email" type="email" name="name" matInput placeholder="WprowadŸ email" [formControl]="email1" required>
+              <mat-icon matSuffix color="primary">email</mat-icon>
+              <mat-error *ngIf="email1.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <div class="row"></div>
+          <mat-form-field appearance="outline" class="example-container">
+              <mat-label>Has³o</mat-label>
+              <input [(ngModel)]="password" type="password" name="password" matInput placeholder="WprowadŸ has³o" [type]="hide ? 'password' : 'text'" [formControl]="haslo" required>
+              <mat-icon matSuffix color="primary" (click)="hide = !hide" color="primary">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <mat-error *ngIf="haslo.invalid">{{getErrorMessage1()}}</mat-error>
+            </mat-form-field>
+        </form>
+        <div class="text-center">
+        <button mat-raised-button color="primary"(click)="login()" class="custom"><i [ngBusy]="busy" ></i>Zaloguj</button>
+        <div class="row"></div>
+        <button mat-button color="primary" (click)="changeToForgot()" class="custom">Przywróæ has³o</button>
+        </div>
+    </mat-card>
+  </div>
+  <div class="col-sm"></div>
+	</div>
